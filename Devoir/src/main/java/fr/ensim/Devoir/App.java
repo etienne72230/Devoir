@@ -4,14 +4,21 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
+	public static final Logger logger = LogManager.getRootLogger();
     public static void main( String[] args )
     {
+    	
         CompagnieAssurance assurance = new CompagnieAssurance("Axa");
 		Personne p1 = new Personne("Cayon", "Etienne", new Date(96,00,07), true);
 		p1.creerContrat("ContratPrevoyance", "E15A35", true);
@@ -49,7 +56,7 @@ public class App
     	String[] arg = str.split(" ");
     	Personne p = new Personne(arg[1], arg[0], new Date(arg[2]), true);
     	assurance.addContact(p);
-    	System.out.println(p+ "a été ajouté !");
+    	logger.info(p+ "a été ajouté !");
     }
     
     private static void nouveauContrat(CompagnieAssurance assurance) {
@@ -66,7 +73,7 @@ public class App
     	String str = sc.nextLine();
     	String[] arg = str.split(" ");
     	assurance.getContacts().get(index).creerContrat(arg[0], arg[1], true);
-    	System.out.println("Création d'un contrat "+arg[0]+" numéro "+ arg[1]+"  pour "+assurance.getContacts().get(index));
+    	logger.info("Création d'un contrat "+arg[0]+" numéro "+ arg[1]+"  pour "+assurance.getContacts().get(index));
     }
     
 }
