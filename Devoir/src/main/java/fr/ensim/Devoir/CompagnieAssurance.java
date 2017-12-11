@@ -17,6 +17,10 @@ public class CompagnieAssurance {
 		contacts.add(p);
 	}
 	
+	public List<Personne> getContacts(){
+		return contacts;
+	}
+	
 	public int obtenirNombreDeClients() {
 		int nbClients=0;
 		for(Personne p : contacts) {
@@ -41,7 +45,7 @@ public class CompagnieAssurance {
 		return nbContrats;
 	}
 	
-	public Personne obentirPlusGrosClient() {
+	public Personne obtenirPlusGrosClient() {
 		Collections.sort(contacts);
 		return contacts.get(0);
 	}

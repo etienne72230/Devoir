@@ -39,9 +39,9 @@ public class Personne implements Comparable<Personne>{
 	public Contrat creerContrat(String typeContrat, String numeroContrat, boolean ContratValide) {
 		Contrat contrat=null;
 		switch(typeContrat) {
-		case "ContratAuto": contrat=new ContratAuto(numeroContrat, ContratValide);break;
-		case "ContratMRH": contrat=new ContratMRH(numeroContrat, ContratValide);break;
-		case "ContratPrevoyance": contrat=new ContratPrevoyance(numeroContrat, ContratValide);break;
+		case "ContratAuto": contrat=new ContratAuto(numeroContrat, ContratValide);contrats.add(contrat);break;
+		case "ContratMRH": contrat=new ContratMRH(numeroContrat, ContratValide);contrats.add(contrat);break;
+		case "ContratPrevoyance": contrat=new ContratPrevoyance(numeroContrat, ContratValide);contrats.add(contrat);break;
 		default : System.out.println("Erreur : type de contrat inconnu");
 		}
 		return contrat;
@@ -51,7 +51,7 @@ public class Personne implements Comparable<Personne>{
 		contrats.remove(contrat);
 	}
 	
-	public void resilierContrats(String numero) {
+	public void resilierContrat(String numero) {
 		for(Contrat contrat : contrats) {
 			if(contrat.numeroContrat == numero) {
 				contrats.remove(contrat);
@@ -67,7 +67,7 @@ public class Personne implements Comparable<Personne>{
 	public List<Contrat> obtenirContratsAuto(){
 		List<Contrat> contratsAuto = new ArrayList<Contrat>();
 		for(Contrat contrat : contrats) {
-			if(contrat.getClass().equals("ContratAuto")) {
+			if(contrat.getClass().getSimpleName().equals("ContratAuto")) {
 				contratsAuto.add(contrat);
 			}
 		}
@@ -77,7 +77,7 @@ public class Personne implements Comparable<Personne>{
 	public List<Contrat> obtenirContratsMRH(){
 		List<Contrat> contratsMRH = new ArrayList<Contrat>();
 		for(Contrat contrat : contrats) {
-			if(contrat.getClass().equals("ContratMRH")) {
+			if(contrat.getClass().getSimpleName().equals("ContratMRH")) {
 				contratsMRH.add(contrat);
 			}
 		}
@@ -85,7 +85,7 @@ public class Personne implements Comparable<Personne>{
 	}
 	
 	public String toString() {
-		return obtenirNomComplet()+" née le "+dateDeNaissance;
+		return obtenirNomComplet()+" née le "+dateDeNaissance+" et comporte "+contrats.size()+" contrat(s)";
 	}
 
 	@Override
